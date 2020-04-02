@@ -3,7 +3,6 @@ package com.example.graphql.config;
 import com.example.graphql.exception.GraphQLErrorAdapter;
 import com.example.graphql.repository.AuthorRepository;
 import com.example.graphql.repository.BookRepository;
-import com.example.graphql.resolver.BookResolver;
 import com.example.graphql.resolver.Mutation;
 import com.example.graphql.resolver.Query;
 import graphql.ExceptionWhileDataFetching;
@@ -18,12 +17,6 @@ import java.util.stream.Collectors;
 
 @Configuration
 public class GraphQLConfig {
-
-
-    @Bean
-    public BookResolver authorResolver(AuthorRepository authorRepository) {
-        return new BookResolver(authorRepository);
-    }
 
     @Bean
     public Query query(AuthorRepository authorRepository, BookRepository bookRepository) {

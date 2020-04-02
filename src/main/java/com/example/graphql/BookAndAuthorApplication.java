@@ -1,13 +1,7 @@
 package com.example.graphql;
 
-import com.example.graphql.model.Author;
-import com.example.graphql.repository.AuthorRepository;
-import com.example.graphql.model.Book;
-import com.example.graphql.repository.BookRepository;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class BookAndAuthorApplication {
@@ -15,7 +9,7 @@ public class BookAndAuthorApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(BookAndAuthorApplication.class, args);
 	}
-
+/*
 	@Bean
 	public CommandLineRunner demo(AuthorRepository authorRepository, BookRepository bookRepository) {
 		return args -> {
@@ -31,4 +25,5 @@ public class BookAndAuthorApplication {
 			bookRepository.save(new Book("Lololo 2nd", "123323333", 11, author2));
 		};
 	}
+ */
 }

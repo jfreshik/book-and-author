@@ -17,11 +17,11 @@ public class Query implements GraphQLQueryResolver {
     }
 
     public Iterable<Book> findAllBooks() {
-        return bookRepository.findAll();
+        return bookRepository.findAllWithFetchJoin();
     }
 
     public Iterable<Author> findAllAuthors() {
-        return authorRepository.findAll();
+        return authorRepository.findAllWithFetchJoin();
     }
 
     public int countBooks() {
