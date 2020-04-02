@@ -7,6 +7,7 @@ type Author {
 
 type Query {
     findAllAuthors: [Author]!
+    findAllAuthorsPage(page: Int!, size: Int!): [Author]!
     countAuthors: Int!
 }
 
