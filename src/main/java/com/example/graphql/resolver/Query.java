@@ -5,6 +5,8 @@ import com.example.graphql.model.Author;
 import com.example.graphql.model.Book;
 import com.example.graphql.repository.AuthorRepository;
 import com.example.graphql.repository.BookRepository;
+import com.example.graphql.type.CustomPaging;
+import org.springframework.data.domain.Page;
 
 public class Query implements GraphQLQueryResolver {
 
@@ -29,7 +31,8 @@ public class Query implements GraphQLQueryResolver {
     }
 
     public Iterable<Author> findAllAuthorsPage(CustomPaging paging) {
-        return authorRepository.findAllPage(paging.toPageRequest()).getContent();
+        Page<Author> allPage = authorRepository.findAllPage(paging.toPageRequest());
+        return allPage.getContent();
     }
 
     public int countBooks() {

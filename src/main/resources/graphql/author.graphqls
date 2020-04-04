@@ -1,8 +1,21 @@
 # define InputObject
+
+enum CustomOrder {
+    ASC,
+    DESC
+}
+
+input CustomSort {
+    field: String!
+    order: CustomOrder
+}
+
 input CustomPaging {
     page: Int!
     size: Int!
+    sort: CustomSort
 }
+
 
 type Author {
     id: ID!
