@@ -2,6 +2,10 @@ language: java
 jdk:
   - openjdk8
 
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+
 branches:
   only:
     - master
@@ -11,16 +15,17 @@ before_install:
 
 cache:
   - directories:
-      - '$HOME/.m2/repository'
+      - '$HOME/.m2'
       - '$HOME/.gradle'
 
 
 script: "./mvnw clean package"
 
 before_deploy:
+  - export BUILD_TAG=$COMMIT-$TRAVIS_BUILD_NUMBER
   - zip -r book-and-author *
   - mkdir -p deploy
-  - mv book-and-author.zip deploy/book-and-author.zip
+  - mv book-and-author.zip deploy/book-and-author_$BUILD_TAG.zip
 
 deploy:
   - provider: s3
