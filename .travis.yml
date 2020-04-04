@@ -4,7 +4,8 @@ jdk:
 
 env:
   global:
-    - COMMIT=${TRAVIS_COMMIT::8}
+    - BUILD_TAG=${TRAVIS_COMMIT::8}-$TRAVIS_BUILD_NUMBER\
+    - DEPLOY_FILENAME=book-and-author_$BUILD_TAG.zip
 
 branches:
   only:
@@ -14,18 +15,21 @@ before_install:
   - chmod +x mvnw
 
 cache:
-  - directories:
-      - '$HOME/.m2'
-      - '$HOME/.gradle'
+  directories:
+    - $HOME/.m2
+    - $HOME/.gradle
 
-
-script: "./mvnw clean package"
+script:
+  - ./mvnw clean package -DskipTests
 
 before_deploy:
-  - export BUILD_TAG=$COMMIT-$TRAVIS_BUILD_NUMBER
-  - zip -r book-and-author *
+  - mkdir -p deploy_files
+  - cp scripts/*.sh deploy_files/
+  - cp appspec.yml deploy_files/
+  - cp target/*.jar deploy_files/book-and-author.jar
+  - zip -j book-and-author.zip deploy_files/*
   - mkdir -p deploy
-  - mv book-and-author.zip deploy/book-and-author_$BUILD_TAG.zip
+  - cp book-and-author.zip deploy/
 
 deploy:
   - provider: s3
@@ -37,3 +41,12 @@ deploy:
     acl: private
     local_dir: deploy
     wait-until-deployed: true
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: jfreshik-build
+    key: book-and-author.zip
+    application: book-and-author-graphql
+    deployment_group: jfreshik-deploy-group
+    region: ap-northeast-2
