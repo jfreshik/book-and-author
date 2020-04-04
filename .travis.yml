@@ -16,3 +16,19 @@ cache:
 
 
 script: "./mvnw clean package"
+
+before_deploy:
+  - zip -r book-and-author *
+  - mkdir -p deploy
+  - mv book-and-author.zip deploy/book-and-author.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: jfreshik-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
