@@ -18,6 +18,6 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
      * countQuery 에는 fetch 키워드 삭제!!
      */
     @Query(value = "select a from Author a left join fetch a.bookList",
-            countQuery = "select a from Author a left join a.bookList")
+            countQuery = "select count(a) from Author a left join a.bookList")
     Page<Author> findAllPage(Pageable pageable);
 }
