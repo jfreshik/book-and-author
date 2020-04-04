@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jfreshik/book-and-author.svg?branch=master)](https://travis-ci.org/jfreshik/book-and-author)
+
 # Spring Boot suppert for GraphQL
 * https://www.pluralsight.com/guides/building-a-graphql-server-with-spring-boot
 * https://www.baeldung.com/spring-graphql
@@ -5,24 +7,28 @@
 ## dependencies
 * pom.xml
 ```xml
-<dependency>
-    <groupId>com.graphql-java</groupId>
-    <artifactId>graphql-spring-boot-starter</artifactId>
-    <version>5.0.2</version>
-</dependency>
-
-<dependency>
-    <groupId>com.graphql-java</groupId>
-    <artifactId>graphql-java-tools</artifactId>
-    <version>5.2.4</version>
-</dependency>
-
-<!-- GraphiQL -->
-<dependency>
-    <groupId>com.graphql-java</groupId>
-    <artifactId>graphiql-spring-boot-starter</artifactId>
-    <version>5.0.2</version>
-</dependency>
+<dependencies>
+    ...
+    <dependency>
+        <groupId>com.graphql-java</groupId>
+        <artifactId>graphql-spring-boot-starter</artifactId>
+        <version>5.0.2</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>com.graphql-java</groupId>
+        <artifactId>graphql-java-tools</artifactId>
+        <version>5.2.4</version>
+    </dependency>
+    
+    <!-- GraphiQL -->
+    <dependency>
+        <groupId>com.graphql-java</groupId>
+        <artifactId>graphiql-spring-boot-starter</artifactId>
+        <version>5.0.2</version>
+    </dependency>
+    ...
+</dependencies>
 ```
 
 ## graphql resource
