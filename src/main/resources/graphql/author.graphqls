@@ -1,3 +1,9 @@
+# define InputObject
+input CustomPaging {
+    page: Int!
+    size: Int!
+}
+
 type Author {
     id: ID!
     firstName: String!
@@ -7,7 +13,7 @@ type Author {
 
 type Query {
     findAllAuthors: [Author]!
-    findAllAuthorsPage(page: Int!, size: Int!): [Author]!
+    findAllAuthorsPage(paging: CustomPaging!): [Author]!
     countAuthors: Int!
 }
 
